@@ -4,6 +4,7 @@ export type BmiCategory = 'low' | 'normal' | 'slightlyHigh' | 'high' | 'veryHigh
 
 export interface UserInput {
   photoUrl: string | null;
+  photoFile: File | null;
   heightCm: number;
   weightKg: number;
   gender: Gender;
@@ -25,4 +26,5 @@ export interface StyleRecommendation {
   fitTips: string[];
   items: string[];
   avoid: string[];
+  aiAdvice?: string;
 }

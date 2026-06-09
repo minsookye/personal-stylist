@@ -1,0 +1,8 @@
+name = "personalstylist"
+pages_build_output_dir = "dist"
+
+# 로컬 개발 시 환경변수는 .dev.vars 파일에 설정 (wrangler pages dev 용)
+# 프로덕션 환경변수는 Cloudflare Dashboard > Pages > Settings > Environment variables 에서 설정
+
+# [vars]
+# PWCAI_MODEL = "gpt-4o-mini"

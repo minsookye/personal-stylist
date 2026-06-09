@@ -14,6 +14,7 @@ const GENDERS: { value: Gender; label: string }[] = [
 
 export default function InputForm({ onSubmit }: Props) {
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [height, setHeight] = useState(168);
   const [weight, setWeight] = useState(60);
   const [gender, setGender] = useState<Gender>('female');
@@ -23,11 +24,12 @@ export default function InputForm({ onSubmit }: Props) {
     if (!file) return;
     if (photoUrl) URL.revokeObjectURL(photoUrl);
     setPhotoUrl(URL.createObjectURL(file));
+    setPhotoFile(file);
   }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    onSubmit({ photoUrl, heightCm: height, weightKg: weight, gender });
+    onSubmit({ photoUrl, photoFile, heightCm: height, weightKg: weight, gender });
   }
 
   return (

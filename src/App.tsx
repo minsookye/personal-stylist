@@ -3,24 +3,38 @@ import './App.css';
 import InputForm from './components/InputForm';
 import ResultCard from './components/ResultCard';
 import { recommendStyle } from './lib/recommend';
+import { generateAiAdvice } from './lib/aiRecommend';
 import type { StyleRecommendation, UserInput } from './types';
 
 function App() {
   const [result, setResult] = useState<StyleRecommendation | null>(null);
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [aiLoading, setAiLoading] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
 
-  function handleSubmit(input: UserInput) {
+  async function handleSubmit(input: UserInput) {
     const rec = recommendStyle(input.heightCm, input.weightKg, input.gender);
     setPhotoUrl(input.photoUrl);
     setResult(rec);
+    setAiLoading(true);
+
     setTimeout(() => {
       resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 80);
+
+    try {
+      const aiAdvice = await generateAiAdvice(rec, input.heightCm, input.weightKg, input.gender, input.photoFile);
+      setResult({ ...rec, aiAdvice });
+    } catch (err) {
+      console.error('AI 조언 생성 실패:', err);
+    } finally {
+      setAiLoading(false);
+    }
   }
 
   function handleReset() {
     setResult(null);
+    setAiLoading(false);
   }
 
   return (
@@ -40,6 +54,7 @@ function App() {
             <ResultCard
               recommendation={result}
               photoUrl={photoUrl}
+              aiLoading={aiLoading}
               onReset={handleReset}
             />
           )}

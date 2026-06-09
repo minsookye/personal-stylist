@@ -254,6 +254,36 @@ input[type="range"]::-moz-range-thumb {
 }
 .btn-ghost:hover { background: rgba(255, 255, 255, 0.13); }
 
+/* ===== AI Advice Section ===== */
+.ai-advice-section {
+  background: linear-gradient(135deg, rgba(251, 113, 133, 0.08), rgba(139, 92, 246, 0.08));
+  border: 1px solid rgba(251, 113, 133, 0.25);
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.ai-loading {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.ai-advice-text {
+  color: var(--text);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.ai-advice-error {
+  color: var(--text-faint);
+  font-size: 0.88rem;
+}
+
 .disclaimer { text-align: center; font-size: 0.78rem; color: var(--text-faint); }
 
 .foot { text-align: center; font-size: 0.78rem; color: var(--text-faint); }

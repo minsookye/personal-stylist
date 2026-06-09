@@ -3,10 +3,11 @@ import type { StyleRecommendation } from '../types';
 interface Props {
   recommendation: StyleRecommendation;
   photoUrl: string | null;
+  aiLoading: boolean;
   onReset: () => void;
 }
 
-export default function ResultCard({ recommendation, photoUrl, onReset }: Props) {
+export default function ResultCard({ recommendation, photoUrl, aiLoading, onReset }: Props) {
   const r = recommendation;
 
   return (
@@ -33,6 +34,17 @@ export default function ResultCard({ recommendation, photoUrl, onReset }: Props)
         {r.keywords.map((k) => (
           <span key={k} className="chip">#{k}</span>
         ))}
+      </div>
+
+      <div className="section ai-advice-section">
+        <h3>🤖 AI 스타일리스트 조언</h3>
+        {aiLoading ? (
+          <p className="ai-loading">✨ AI가 맞춤 스타일 조언을 생성하고 있어요...</p>
+        ) : r.aiAdvice ? (
+          <p className="ai-advice-text">{r.aiAdvice}</p>
+        ) : (
+          <p className="ai-advice-error">AI 조언을 불러오지 못했어요.</p>
+        )}
       </div>
 
       <div className="section">
